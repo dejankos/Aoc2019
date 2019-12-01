@@ -1,0 +1,10 @@
+[package]
+name = "AoC2019"
+version = "0.1.0"
+authors = ["Dejan Kos <com.dejan.kos@gmail.com>"]
+edition = "2018"
+description = "Advent of code 2019"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
