@@ -8,7 +8,7 @@ fn cal_fuel_req_for_all(modules: Vec<usize>) -> usize {
 
 
 fn calc_fuel_req_for_module(module_mass: usize) -> usize {
-    if module_mass == 0 || module_mass < 6 {
+    if module_mass < 6 {
         return 0;
     }
     let req = (module_mass / 3) - 2;
