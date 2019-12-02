@@ -4,11 +4,6 @@ pub fn parse_input() -> Vec<usize> {
     RAW_INPUT.lines().map(|s| s.parse().unwrap()).collect()
 }
 
-#[allow(dead_code)]
-fn main() {
-    println!("{:?}", parse_input());
-}
-
 const RAW_INPUT: &str = r#"62371
 94458
 78824

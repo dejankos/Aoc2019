@@ -1,6 +1,4 @@
-pub mod day_1_data;
-
-fn calc_fuel_req(modules: Vec<usize>) -> usize {
+pub fn calc_fuel_req(modules: Vec<usize>) -> usize {
     modules.iter()
         .map(|m| (m / 3) - 2)
         .sum()
@@ -8,6 +6,8 @@ fn calc_fuel_req(modules: Vec<usize>) -> usize {
 
 #[cfg(test)]
 mod tests {
+    use crate::day_1_data;
+
     use super::*;
 
     #[test]
@@ -18,8 +18,4 @@ mod tests {
         let res = calc_fuel_req(day_1_data::parse_input());
         assert!(res > 0);
     }
-}
-
-fn main() {
-    println!("Answer to part one is = {}", calc_fuel_req(day_1_data::parse_input()));
 }

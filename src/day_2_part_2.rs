@@ -1,12 +1,10 @@
-pub mod day_2_part_1;
-pub mod day_2_data;
+use crate::{day_2_data, day_2_part_1};
 
 type IntTuple = (usize, usize);
 
 const MATCH: usize = 19690720;
 
-
-fn find_noun_verb() -> IntTuple {
+pub fn find_noun_verb() -> IntTuple {
     let input = day_2_data::parse_input();
 
     for noun in 0..99 {
@@ -32,8 +30,4 @@ mod tests {
     fn should_find_noun_verb() {
         find_noun_verb(); // just don't panic
     }
-}
-
-fn main() {
-    println!("Answer to part two is = {:?}", find_noun_verb());
 }

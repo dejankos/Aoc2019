@@ -1,6 +1,5 @@
-mod day_1_data;
 
-fn cal_fuel_req_for_all(modules: Vec<usize>) -> usize {
+pub fn cal_fuel_req_for_all(modules: Vec<usize>) -> usize {
     modules.iter()
         .map(|m| calc_fuel_req_for_module(m.to_owned()))
         .sum()
@@ -19,6 +18,7 @@ fn calc_fuel_req_for_module(module_mass: usize) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::day_1_data;
 
     #[test]
     fn should_calc_fuel_req_for_each_module() {
@@ -31,8 +31,4 @@ mod tests {
     fn should_calc_fuel_req_for_all_modules() {
         assert!(cal_fuel_req_for_all(day_1_data::parse_input()) > 0)
     }
-}
-
-fn main() {
-    println!("Answer to part two is = {}", cal_fuel_req_for_all(day_1_data::parse_input()));
 }
