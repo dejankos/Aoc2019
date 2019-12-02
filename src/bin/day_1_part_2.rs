@@ -1,4 +1,4 @@
-mod data_1_12_2019;
+mod day_1_data;
 
 fn cal_fuel_req_for_all(modules: Vec<usize>) -> usize {
     modules.iter()
@@ -29,10 +29,10 @@ mod tests {
 
     #[test]
     fn should_calc_fuel_req_for_all_modules() {
-        assert!(cal_fuel_req_for_all(data_1_12_2019::parse_input()) > 0)
+        assert!(cal_fuel_req_for_all(day_1_data::parse_input()) > 0)
     }
 }
 
 fn main() {
-    println!("Answer to part two is = {}", cal_fuel_req_for_all(data_1_12_2019::parse_input()));
+    println!("Answer to part two is = {}", cal_fuel_req_for_all(day_1_data::parse_input()));
 }

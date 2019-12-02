@@ -1,4 +1,4 @@
-pub mod data_1_12_2019;
+pub mod day_1_data;
 
 fn calc_fuel_req(modules: Vec<usize>) -> usize {
     modules.iter()
@@ -15,11 +15,11 @@ mod tests {
         assert_eq!(2, calc_fuel_req(vec![12]));
         assert_eq!(2, calc_fuel_req(vec![14]));
 
-        let res = calc_fuel_req(data_1_12_2019::parse_input());
+        let res = calc_fuel_req(day_1_data::parse_input());
         assert!(res > 0);
     }
 }
 
 fn main() {
-    println!("Answer to part one is = {}", calc_fuel_req(data_1_12_2019::parse_input()));
+    println!("Answer to part one is = {}", calc_fuel_req(day_1_data::parse_input()));
 }
