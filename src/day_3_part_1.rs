@@ -1,16 +1,32 @@
 use std::collections::HashSet;
+use std::hash::{Hash, Hasher};
 
-#[derive(PartialEq, Eq, Hash, Debug)]
-struct Point {
+#[derive(Debug, Copy, Clone)]
+pub struct Point {
     x: isize,
     y: isize,
+    pub(crate) steps: usize,
 }
+
+impl Hash for Point {
+    fn hash<H>(&self, state: &mut H) where H: Hasher {
+        (&self.x, &self.y).hash(state);
+    }
+}
+
+impl PartialEq for Point {
+    fn eq(&self, other: &Self) -> bool {
+        (&self.x, &self.y) == (&other.x, &other.y)
+    }
+}
+
+impl Eq for Point{}
 
 pub fn calc_manhattan_distance(f: Vec<&str>, s: Vec<&str>) -> isize {
     let h_set1 = calc_path(f);
     let h_set2 = calc_path(s);
 
-    find_intersections(h_set1, h_set2)
+    find_intersections(&h_set1, &h_set2)
         .iter()
         .map(|p| p.x.abs() + p.y.abs())
         .min()
@@ -18,22 +34,25 @@ pub fn calc_manhattan_distance(f: Vec<&str>, s: Vec<&str>) -> isize {
 }
 
 
-fn find_intersections(mut h_set1: HashSet<Point>, h_set2: HashSet<Point>) -> Vec<Point> {
-    h_set1.drain()
+pub fn find_intersections(h_set1: &HashSet<Point>, h_set2: &HashSet<Point>) -> Vec<Point> {
+    h_set1.iter()
+        .cloned()
         .filter(|p| h_set2.contains(p))
-        .collect()
+        .collect::<Vec<Point>>()
 }
 
-fn calc_path(data: Vec<&str>) -> HashSet<Point> {
+pub fn calc_path(data: Vec<&str>) -> HashSet<Point> {
     let mut points: HashSet<Point> = HashSet::new();
     let mut x: isize = 0;
     let mut y: isize = 0;
+    let mut steps: usize = 0;
 
     for d in data {
         let direction = &d[0..1];
         let moves = d[1..].parse::<isize>().unwrap();
-        for _ in 0..moves {
-            let point = create_point(direction, x, y);
+        for m in 0..moves {
+            steps += 1;
+            let point = create_point(direction, x, y, steps);
             x = point.x;
             y = point.y;
             points.insert(point);
@@ -43,23 +62,23 @@ fn calc_path(data: Vec<&str>) -> HashSet<Point> {
     points
 }
 
-fn create_point(direction: &str, mut x: isize, mut y: isize) -> Point {
+fn create_point(direction: &str, mut x: isize, mut y: isize, steps: usize) -> Point {
     match direction {
         "L" => {
             x = x - 1;
-            Point { x, y }
+            Point { x, y, steps }
         }
         "R" => {
             x = x + 1;
-            Point { x, y }
+            Point { x, y, steps }
         }
         "U" => {
             y = y + 1;
-            Point { x, y }
+            Point { x, y, steps }
         }
         "D" => {
             y = y - 1;
-            Point { x, y }
+            Point { x, y, steps }
         }
         _ => panic!("Unknown direction")
     }
