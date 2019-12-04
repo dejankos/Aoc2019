@@ -50,7 +50,7 @@ pub fn calc_path(data: Vec<&str>) -> HashSet<Point> {
     for d in data {
         let direction = &d[0..1];
         let moves = d[1..].parse::<isize>().unwrap();
-        for m in 0..moves {
+        for _ in 0..moves {
             steps += 1;
             let point = create_point(direction, x, y, steps);
             x = point.x;
