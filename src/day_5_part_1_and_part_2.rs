@@ -1,4 +1,4 @@
-use std::borrow::{Borrow, BorrowMut};
+use std::borrow::Borrow;
 use std::collections::HashMap;
 
 pub struct IntCodeComputer {
@@ -88,6 +88,38 @@ impl IntCodeComputer {
                 self.output.push(self.get_param(1));
                 self.position += 2;
             }
+            5 => {
+                if self.get_param(1) != 0 {
+                    self.position = self.get_param(2) as usize;
+                } else {
+                    self.position += 3;
+                }
+            }
+            6 => {
+                if self.get_param(1) == 0 {
+                    self.position = self.get_param(2) as usize;
+                } else {
+                    self.position += 3;
+                }
+            }
+            7 => {
+                let third_idx =  self.data[(self.position + 3) as usize] as usize;
+                if self.get_param(1) < self.get_param(2) {
+                    self.data[third_idx] = 1;
+                } else {
+                    self.data[third_idx] = 0;
+                }
+                self.position += 4;
+            }
+            8 => {
+                let third_idx =  self.data[(self.position + 3) as usize] as usize;
+                if self.get_param(1) == self.get_param(2) {
+                    self.data[third_idx] = 1;
+                } else {
+                    self.data[third_idx] = 0;
+                }
+                self.position += 4;
+            }
             _ => panic!("Unknown op code !")
         }
     }
@@ -107,7 +139,6 @@ impl IntCodeComputer {
 #[cfg(test)]
 mod tests {
     use crate::day_5_data;
-    use crate::day_5_data::parse_input;
 
     use super::*;
 
@@ -118,5 +149,15 @@ mod tests {
 
         let result = IntCodeComputer::run(input, data);
         println!("{:?}", result);
+    }
+
+    #[test]
+    fn should_compute_part_1() {
+        assert_eq!(IntCodeComputer::run(1, day_5_data::parse_input()), 13978427);
+    }
+
+    #[test]
+    fn should_compute_part_2() {
+        assert_eq!(IntCodeComputer::run(5, day_5_data::parse_input()), 11189491);
     }
 }
