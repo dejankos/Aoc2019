@@ -4,9 +4,15 @@ use std::sync::mpsc::channel;
 
 use crate::day_6_data::Orbit;
 
-const COM: &str = "COM";
+pub const COM: &str = "COM";
 
 pub fn count_orbits(orbits: Vec<Orbit>) -> usize {
+    chain_orbits(orbits).values()
+        .map(|vec| vec.len())
+        .sum()
+}
+
+pub fn chain_orbits(orbits: Vec<Orbit>) -> HashMap<&'static str, Vec<String>> {
     let mut chain_map: HashMap<&str, Vec<String>> = HashMap::new();
     let mut map: HashMap<&str, &str> = HashMap::new();
 
@@ -21,9 +27,7 @@ pub fn count_orbits(orbits: Vec<Orbit>) -> usize {
         //println!("{} - {:?}", v, chain_map[v]);
     }
 
-    chain_map.values()
-        .map(|vec| vec.len())
-        .sum()
+    chain_map
 }
 
 fn chain(val: &str, map: &HashMap<&str, &str>) -> Vec<String> {

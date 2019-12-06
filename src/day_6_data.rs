@@ -22,6 +22,20 @@ E)J
 J)K
 K)L"#;
 
+pub const RAW_DATA_TEST_PART_2: &str = r#"COM)B
+B)C
+C)D
+D)E
+E)F
+B)G
+G)H
+D)I
+E)J
+J)K
+K)L
+K)YOU
+I)SAN"#;
+
 pub const RAW_DATA: &str = r#"XLG)95G
 W3V)ZZ3
 ZM3)Q4Q
