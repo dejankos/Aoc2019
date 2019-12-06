@@ -48,7 +48,7 @@ fn chain(val: &str, map: &HashMap<&str, &str>) -> Vec<String> {
 
 #[cfg(test)]
 mod tests {
-    use crate::{day_5_data, day_6_data};
+    use crate::day_6_data;
 
     use super::*;
 

@@ -30,12 +30,12 @@ pub fn calc_transfers(orbits: Vec<Orbit>) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use crate::{day_5_data, day_6_data};
+    use crate::day_6_data;
 
     use super::*;
 
     #[test]
-    fn should_count_orbits() {
+    fn should_calc_transfers() {
         let res = calc_transfers(day_6_data::parse_input(day_6_data::RAW_DATA_TEST_PART_2));
         assert_eq!(res, 4);
     }
