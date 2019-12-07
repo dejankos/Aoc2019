@@ -2,7 +2,7 @@ use std::borrow::Borrow;
 use std::collections::HashMap;
 
 pub struct IntCodeComputer {
-    input: u32,
+    input: Vec<u32>,
     data: Vec<isize>,
     output: Vec<isize>,
     position: usize,
@@ -10,14 +10,14 @@ pub struct IntCodeComputer {
 }
 
 impl IntCodeComputer {
-    pub fn run(input: u32, data: Vec<isize>) -> isize {
+    pub fn run(input: Vec<u32>, data: Vec<isize>) -> isize {
         let mut cmp = IntCodeComputer::new(input, data);
         let res = cmp.compute();
 
         res[res.len() - 1]
     }
 
-    fn new(input: u32, data: Vec<isize>) -> Self {
+    fn new(input: Vec<u32>, data: Vec<isize>) -> Self {
         IntCodeComputer {
             input,
             data,
@@ -81,7 +81,7 @@ impl IntCodeComputer {
             }
             3 => {
                 let result_index = self.data[self.position + 1] as usize;
-                self.data[result_index] = self.input as isize;
+                self.data[result_index] = self.input.pop().unwrap() as isize;
                 self.position += 2;
             }
             4 => {
@@ -103,7 +103,7 @@ impl IntCodeComputer {
                 }
             }
             7 => {
-                let third_idx =  self.data[(self.position + 3) as usize] as usize;
+                let third_idx = self.data[(self.position + 3) as usize] as usize;
                 if self.get_param(1) < self.get_param(2) {
                     self.data[third_idx] = 1;
                 } else {
@@ -112,7 +112,7 @@ impl IntCodeComputer {
                 self.position += 4;
             }
             8 => {
-                let third_idx =  self.data[(self.position + 3) as usize] as usize;
+                let third_idx = self.data[(self.position + 3) as usize] as usize;
                 if self.get_param(1) == self.get_param(2) {
                     self.data[third_idx] = 1;
                 } else {
@@ -143,21 +143,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn should_compute_smth() {
-        let data = vec!(1002, 4, 3, 4, 33);
-        let input = 1;
-
-        let result = IntCodeComputer::run(input, data);
-        println!("{:?}", result);
-    }
-
-    #[test]
     fn should_compute_part_1() {
-        assert_eq!(IntCodeComputer::run(1, day_5_data::parse_input()), 13978427);
+        assert_eq!(IntCodeComputer::run(vec![1], day_5_data::parse_input()), 13978427);
     }
 
     #[test]
     fn should_compute_part_2() {
-        assert_eq!(IntCodeComputer::run(5, day_5_data::parse_input()), 11189491);
+        assert_eq!(IntCodeComputer::run(vec![5], day_5_data::parse_input()), 11189491);
     }
 }

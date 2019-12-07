@@ -10,6 +10,8 @@ use crate::day_5_part_1_and_part_2::IntCodeComputer;
 use crate::day_6_data::RAW_DATA;
 use crate::day_6_part_1::count_orbits;
 use crate::day_6_part_2::calc_transfers;
+use crate::day_7_part_1::AmplifierController;
+use crate::day_7_data::RAW_INPUT;
 
 mod day_1_data;
 mod day_1_part_1;
@@ -27,6 +29,8 @@ mod day_5_data;
 mod day_6_part_1;
 mod day_6_part_2;
 mod day_6_data;
+mod day_7_data;
+mod day_7_part_1;
 
 fn main() {
     println!("Ho ho ho!");
@@ -43,9 +47,11 @@ fn main() {
     println!("Answer to day 4 part 1 is = {}", diff_passwords(171309, 643603));
     println!("Answer to day 4 part 2 is = {}", diff_passwords_improved(171309, 643603));
 
-    println!("Answer to day 5 part 1 is = {}", IntCodeComputer::run(1, day_5_data::parse_input()));
-    println!("Answer to day 5 part 2 is = {}", IntCodeComputer::run(5, day_5_data::parse_input()));
+    println!("Answer to day 5 part 1 is = {}", IntCodeComputer::run(vec![1], day_5_data::parse_input()));
+    println!("Answer to day 5 part 2 is = {}", IntCodeComputer::run(vec![5], day_5_data::parse_input()));
 
     println!("Answer to day 6 part 1 is = {}", count_orbits(day_6_data::parse_input(day_6_data::RAW_DATA)));
     println!("Answer to day 6 part 2 is = {}", calc_transfers(day_6_data::parse_input(day_6_data::RAW_DATA)));
+
+    println!("Answer to day 7 part 1 is = {}", AmplifierController::run(day_7_data::parse_input(RAW_INPUT)));
 }

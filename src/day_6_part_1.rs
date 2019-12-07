@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 use std::ops::Deref;
-use std::sync::mpsc::channel;
 
 use crate::day_6_data::Orbit;
 
