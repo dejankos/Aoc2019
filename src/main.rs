@@ -10,8 +10,9 @@ use crate::day_5_part_1_and_part_2::IntCodeComputer;
 use crate::day_6_data::RAW_DATA;
 use crate::day_6_part_1::count_orbits;
 use crate::day_6_part_2::calc_transfers;
-use crate::day_7_part_1::AmplifierController;
 use crate::day_7_data::RAW_INPUT;
+use crate::day_7_part_1::AmplifierController;
+use crate::day_8_part_1_and_part_2::{calc_pass, decode_image, print_image};
 
 mod day_1_data;
 mod day_1_part_1;
@@ -30,7 +31,9 @@ mod day_6_part_1;
 mod day_6_part_2;
 mod day_6_data;
 mod day_7_data;
+mod day_8_data;
 mod day_7_part_1;
+mod day_8_part_1_and_part_2;
 
 fn main() {
     println!("Ho ho ho!");
@@ -54,4 +57,8 @@ fn main() {
     println!("Answer to day 6 part 2 is = {}", calc_transfers(day_6_data::parse_input(day_6_data::RAW_DATA)));
 
     println!("Answer to day 7 part 1 is = {}", AmplifierController::run(day_7_data::parse_input(RAW_INPUT)));
+    //TODO part 2 - refactor int code computer to support state - halt / wait for input / output
+
+    println!("Answer to day 8 part 1 is = {}", calc_pass(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
+    println!("Answer to day 8 part 2 is"); print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
 }

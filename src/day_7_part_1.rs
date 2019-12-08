@@ -82,27 +82,27 @@ mod tests {
     fn should_find_highest_signal_on_test_data_1() {
         let data = day_7_data::parse_input(RAW_INPUT_TEST_1);
         let mut amp_ctrl = AmplifierController::new(vec![0], data);
-        assert_eq!(amp_ctrl.run(), 43210);
+        assert_eq!(amp_ctrl.run_(), 43210);
     }
 
     #[test]
     fn should_find_highest_signal_on_test_data_2() {
         let data = day_7_data::parse_input(RAW_INPUT_TEST_2);
         let mut amp_ctrl = AmplifierController::new(vec![0], data);
-        assert_eq!(amp_ctrl.run(), 54321);
+        assert_eq!(amp_ctrl.run_(), 54321);
     }
 
     #[test]
     fn should_find_highest_signal_on_test_data_3() {
         let data = day_7_data::parse_input(RAW_INPUT_TEST_3);
         let mut amp_ctrl = AmplifierController::new(vec![0], data);
-        assert_eq!(amp_ctrl.run(), 65210);
+        assert_eq!(amp_ctrl.run_(), 65210);
     }
 
     #[test]
     fn should_find_highest_signal_on_input_data() {
         let data = day_7_data::parse_input(RAW_INPUT);
         let mut amp_ctrl = AmplifierController::new(vec![0], data);
-        println!(amp_ctrl.run(), 338603);
+        assert_eq!(amp_ctrl.run_(), 338603);
     }
 }
