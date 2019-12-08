@@ -6,8 +6,8 @@ use crate::day_6_part_1::{chain_orbits, COM};
 pub fn calc_transfers(orbits: Vec<Orbit>) -> usize {
     let chained: HashMap<&'static str, Vec<String>> = chain_orbits(orbits);
 
-    let mut you = &chained["YOU"];
-    let mut san = &chained["SAN"];
+    let you = &chained["YOU"];
+    let san = &chained["SAN"];
 
     you.to_owned().reverse();
     san.to_owned().reverse();
