@@ -50,7 +50,6 @@ impl Computer {
                 3 => {
                     let input = self.input.pop().unwrap(); // for day 7 part 2 check if input available first
                     self.program[c as usize] = input;
-                    self.position += 2;
                 }
                 4 => {
                     self.output.push(a);
@@ -89,9 +88,9 @@ impl Computer {
     fn position_steps(&self, op_code: isize) -> usize {
         match op_code {
             1 | 2 | 7 | 8 => 4,
-            4 | 9 => 2,
+            3 |4 | 9 => 2,
             5 | 6 => 3,
-            3 | 99 => 0,
+            99 => 0,
             _ => panic!("Op code not supported!")
         }
     }
