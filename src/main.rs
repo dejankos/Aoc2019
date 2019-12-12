@@ -34,6 +34,8 @@ mod day_7_data;
 mod day_8_data;
 mod day_7_part_1;
 mod day_8_part_1_and_part_2;
+mod day_9_part_1_and_part_2;
+mod int_code_computer;
 
 fn main() {
     println!("Ho ho ho!");
@@ -61,4 +63,7 @@ fn main() {
 
     println!("Answer to day 8 part 1 is = {}", calc_pass(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
     println!("Answer to day 8 part 2 is"); print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
+
+    println!("Answer to day 9 part 1 is = {}", day_9_part_1_and_part_2::run(1));
+    println!("Answer to day 9 part 2 is"); day_9_part_1_and_part_2::run(2);
 }
