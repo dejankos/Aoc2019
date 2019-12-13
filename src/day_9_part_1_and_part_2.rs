@@ -26,9 +26,9 @@ pub fn get_input() -> Vec<isize> {
 
 pub fn run(input: isize) -> isize {
     let mut cmp = Computer::new(vec![input], get_input());
-    cmp.run();
+    let res = cmp.run();
 
-    cmp.output[0]
+    res.1[res.1.len() - 1]
 }
 
 #[cfg(test)]

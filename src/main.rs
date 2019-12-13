@@ -6,7 +6,6 @@ use crate::day_3_part_1::calc_manhattan_distance;
 use crate::day_3_part_2::find_min_steps_of_intersection;
 use crate::day_4_part_1::diff_passwords;
 use crate::day_4_part_2::diff_passwords_improved;
-use crate::day_5_part_1_and_part_2::IntCodeComputer;
 use crate::day_6_data::RAW_DATA;
 use crate::day_6_part_1::count_orbits;
 use crate::day_6_part_2::calc_transfers;
@@ -52,8 +51,8 @@ fn main() {
     println!("Answer to day 4 part 1 is = {}", diff_passwords(171309, 643603));
     println!("Answer to day 4 part 2 is = {}", diff_passwords_improved(171309, 643603));
 
-    println!("Answer to day 5 part 1 is = {}", IntCodeComputer::run(vec![1], day_5_data::parse_input()));
-    println!("Answer to day 5 part 2 is = {}", IntCodeComputer::run(vec![5], day_5_data::parse_input()));
+    println!("Answer to day 5 part 1 is = {}", day_5_part_1_and_part_2::run(vec![1], day_5_data::parse_input()));
+    println!("Answer to day 5 part 2 is = {}", day_5_part_1_and_part_2::run(vec![5], day_5_data::parse_input()));
 
     println!("Answer to day 6 part 1 is = {}", count_orbits(day_6_data::parse_input(day_6_data::RAW_DATA)));
     println!("Answer to day 6 part 2 is = {}", calc_transfers(day_6_data::parse_input(day_6_data::RAW_DATA)));
@@ -62,8 +61,9 @@ fn main() {
     //TODO part 2 - refactor int code computer to support state - halt / wait for input / output
 
     println!("Answer to day 8 part 1 is = {}", calc_pass(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
-    println!("Answer to day 8 part 2 is"); print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
+    println!("Answer to day 8 part 2 is");print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
 
     println!("Answer to day 9 part 1 is = {}", day_9_part_1_and_part_2::run(1));
-    println!("Answer to day 9 part 2 is"); day_9_part_1_and_part_2::run(2);
+    println!("Answer to day 9 part 2 is");
+    day_9_part_1_and_part_2::run(2);
 }
