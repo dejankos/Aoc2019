@@ -35,6 +35,8 @@ mod day_7_part_1;
 mod day_8_part_1_and_part_2;
 mod day_9_part_1_and_part_2;
 mod int_code_computer;
+mod day_10_part_1;
+mod day_10_data;
 
 fn main() {
     println!("Ho ho ho!");
