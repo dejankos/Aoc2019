@@ -63,9 +63,10 @@ fn main() {
     //TODO part 2 - refactor int code computer to support state - halt / wait for input / output
 
     println!("Answer to day 8 part 1 is = {}", calc_pass(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
-    println!("Answer to day 8 part 2 is");print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
+    println!("Answer to day 8 part 2 is"); print_image(decode_image(day_8_data::parse_input(25, 6, day_8_data::RAW_DATA)));
 
     println!("Answer to day 9 part 1 is = {}", day_9_part_1_and_part_2::run(1));
-    println!("Answer to day 9 part 2 is");
-    day_9_part_1_and_part_2::run(2);
+    println!("Answer to day 9 part 2 is = {}", day_9_part_1_and_part_2::run(2));
+
+    println!("Answer to day 10 part 1 is = {}", day_10_part_1::find_max_visible(day_10_data::INPUT_DATA));
 }

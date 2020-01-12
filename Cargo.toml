@@ -9,5 +9,4 @@ description = "Advent of code 2019"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 itertools = "0.8.2"
-rust_decimal = "1.0.3"
 

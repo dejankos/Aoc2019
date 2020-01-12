@@ -1,29 +1,37 @@
-use std::collections::HashMap;
-use rust_decimal::Decimal;
-
+use std::collections::{HashMap, HashSet};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 struct Asteroid {
-    x: usize,
-    y: usize,
+    x: isize,
+    y: isize,
 }
 
-#[derive(Debug)]
-struct AsteroidStation {
-    asteroid: Asteroid,
-    slope_map: HashMap<Decimal, Vec<Asteroid>>,
+pub fn find_max_visible(asteroid_map: &str) -> usize {
+    find_visible_per_asteroid(
+        map_to_asteroids(asteroid_map)
+    )
+        .iter()
+        .max_by_key(|ast_count| ast_count.1)
+        .map(|ast| ast.1)
+        .unwrap()
 }
 
-pub fn find_best_location(asteroid_map: &str) {
-    let asteroids = map_to_asteroids(asteroid_map);
+fn find_visible_per_asteroid(all: Vec<Asteroid>) -> Vec<(Asteroid, usize)> {
+    all.iter()
+        .map(|current| {
+            let mut set: HashSet<(isize, isize)> = HashSet::new();
+            let mut max_len = 0;
+            all.iter().for_each(|other| {
+                if current != other {
+                    set.insert(angle(current, other));
+                }
+            });
 
-    let possible_stations =asteroids.iter()
-        .map(|asteroid| calc_slopes(asteroid, &asteroids))
-        .collect::<Vec<AsteroidStation>>();
+            if set.len() > max_len { max_len = set.len() }
 
-    println!("{:?}", possible_stations);
-
-
+            (current.clone(), max_len)
+        })
+        .collect()
 }
 
 fn map_to_asteroids(asteroid_map: &str) -> Vec<Asteroid> {
@@ -31,41 +39,32 @@ fn map_to_asteroids(asteroid_map: &str) -> Vec<Asteroid> {
         .map(|(y, line)| {
             line.chars().into_iter().enumerate()
                 .filter(|(_, c)| c == &'#')
-                .map(move |(x, c)| Asteroid { x, y })
+                .map(move |(x, _)| Asteroid { x: x as isize, y: y as isize })
         })
         .flatten()
-        .collect::<Vec<Asteroid>>()
+        .collect()
 }
 
+fn angle(current: &Asteroid, other: &Asteroid) -> (isize, isize) {
+    let (x, y) = (current.x - other.x, current.y - other.y);
+    let gcd = gcd(x.abs(), y.abs());
 
-fn calc_slopes(current: &Asteroid ,all: &Vec<Asteroid>) -> AsteroidStation {
-    let mut slope_map: HashMap<Decimal, Vec<Asteroid>> = HashMap::new();
-
-    all
-        .iter()
-        .for_each(|asteroid| {
-            if current != asteroid {
-                let (c_y, a_y) = (Decimal::new(current.y as i64, 0), Decimal::new(asteroid.y as i64, 0));
-                let (c_x, a_x) = (Decimal::new(current.x as i64, 0), Decimal::new(asteroid.x as i64, 0));
-                let zero: Decimal = 0.into();
-                let min: Decimal = std::usize::MIN.into();
-
-                println!("{:?} / {:?}", c_y - a_y, c_x - a_x);
-                let slope: Decimal = if c_x - a_x == zero { min } else {(c_y - a_y) / (c_x - a_x)};
-
-                //hm hm
-                if slope_map.contains_key(&slope) {
-                    slope_map.get_mut(&slope).unwrap().push(asteroid.to_owned());
-                } else {
-                    slope_map.insert(slope, vec![current.to_owned(),asteroid.to_owned()]);
-                }
-            }
-        });
-
-
-    AsteroidStation {asteroid: current.clone(), slope_map}
+    if gcd != 0 {
+        (x / gcd, y / gcd)
+    } else {
+        (x, y)
+    }
 }
 
+fn gcd(x: isize, y: isize) -> isize {
+    if x == 0 {
+        y
+    } else if y == 0 {
+        x
+    } else {
+        gcd(y, x % y)
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -74,9 +73,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn should_find_best_location() {
+    fn should_find_max_visible_for_input_data_1() {
+        assert_eq!(8, find_max_visible(day_10_data::TEST_DATA_1));
+    }
 
-        println!("{}", 2 / -1);
-        find_best_location(day_10_data::TEST_DATA_1)
+    #[test]
+    fn should_find_max_visible_for_input_data_2() {
+        assert_eq!(33, find_max_visible(day_10_data::TEST_DATA_2));
+    }
+
+    #[test]
+    fn should_find_max_visible_for_input_data_3() {
+        assert_eq!(210, find_max_visible(day_10_data::TEST_DATA_3));
+    }
+
+    #[test]
+    fn should_find_max_visible_for_input_data() {
+        assert_eq!(303, find_max_visible(day_10_data::INPUT_DATA));
     }
 }
