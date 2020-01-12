@@ -69,4 +69,5 @@ fn main() {
     println!("Answer to day 9 part 2 is = {}", day_9_part_1_and_part_2::run(2));
 
     println!("Answer to day 10 part 1 is = {}", day_10_part_1::find_max_visible(day_10_data::INPUT_DATA));
+    //TODO part 2
 }
